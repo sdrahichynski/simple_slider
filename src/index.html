@@ -22,6 +22,7 @@
 			width: 300px;
 			height: 200px;
 			background-color: white;
+			margin-bottom: 50px
 		}
 
 		.track-wrapper {
@@ -32,6 +33,8 @@
 		.slider-track {
 			display: flex;
 			min-height: 100%;
+
+			transition: transform .2s;
 		}
 
 		.slide {
@@ -125,13 +128,56 @@
 			transform: rotateZ(45deg);
 		}
 
+
+
+		/* .slider-tiny {
+			width: 300px;
+			height: 200px;
+			display: flex;
+			overflow: hidden;
+		}
+
+		.slide-tiny:not(.tns-item) {
+			flex: 0 0 100%;
+		} */
+
+		.tns-outer {
+			position: relative;
+		}
+
+        .tns-nav {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 30px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+		.tns-nav button {
+			display: inline-block;
+			height: 8px;
+			width: 8px;
+			border-radius: 50%;
+			background-color: #aaaaaa;
+			margin: 8px 2px;
+			border: none;
+
+			outline: none;
+			padding: 0;
+		}
+		
+		.tns-nav button.tns-nav-active {
+			background-color: green;
+		}
 	</style>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.8.8/tiny-slider.css">
 </head>
 <body>
 
 	<div class="wrapper">
 		<div class="slider js_slider">
-
 			<div class="track-wrapper">
 				<div class="slider-track js_track">
 					<div class="slide js_slide">
@@ -150,15 +196,139 @@
 
 			<div class="slider-controls">
 				<div class="dots">
-					<span class="dot js_dot"></span>
-					<span class="dot js_dot"></span>
-					<span class="dot js_dot"></span>
+					<span class="dot js_dot" data-index="0"></span>
+					<span class="dot js_dot" data-index="1"></span>
+					<span class="dot js_dot" data-index="2"></span>
 				</div>
 
 				<div class="arrows">
 					<span class="arrow next js_arrow js_next"></span>
 					<span class="arrow prev js_arrow js_prev"></span>
 				</div>
+			</div>
+		</div>
+
+		<div class="slider-tiny js_tiny">
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?1" alt="">
+			</div>
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+				
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>
+				
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>
+				
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>
+				
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
+			</div>
+				
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?2" alt="">
+			</div>	
+	
+			<div class="slide-tiny">
+				<img class="slide-img" src="https://placeimg.com/600/400/tech?3" alt="">
 			</div>
 		</div>
 	</div>
