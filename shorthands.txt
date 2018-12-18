@@ -1,0 +1,9 @@
+1)
+    constructor (props) {
+        super(props);
+
+        >>cursor<<
+    }
+
+2)
+    const { >> cursor << } = this.props;
