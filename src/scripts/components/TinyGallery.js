@@ -3,18 +3,21 @@
 import React from 'react';
 import { tns } from 'tiny-slider';
 
+window.tns = tns;
+
+
 function GalleryItem (props) {
-    const { src, alt } = props;
+    const { src, alt, index, onError } = props;
     return (
         <div className="Tiny-gallery-item">
-            <img src={src} alt={alt} />
+            <img src={src} alt={alt} onError={() =>onError(index)}/>
         </div>
     );
 }
 
 function GalleryItemsList (props) {
-    const { imgs } = props;
-    return imgs.map((img, index) => <GalleryItem key={index} src={img.src} alt={img.alt} />);
+    const { imgs, onError } = props;
+    return imgs.map((img, index) => <GalleryItem key={index} index={index} src={img.src} alt={img.alt} onError={index => onError(index)}/>);
 }
 
 function NavItem (props) {
@@ -45,22 +48,38 @@ class TinyGallery extends React.Component {
         super(props);
 
         this.slider = null;
+        this.state = {
+            imgs: props.imgs
+        }
     }
 
     componentDidMount () {
-        if (this.props.imgs.length) this.initSlider();
+        // if (this.props.imgs.length) this.initSlider();
     }
 
     componentWillUnmount () {
         if (this.slider && this.slider.destroy) this.slider.destroy();
     }
 
+    componentDidUpdate () {
+        // this.slider.destroy && this.slider.destroy();
+        console.log(21)
+         this.initSlider();
+    }
+
+    componentWillUpdate () {
+        console.log(this.slider);
+    }
+
     initSlider () {
+        console.log('slider initialize')
         const options = {
-            container        : this.sliderContainer,
-            navContainer     : this.navContainer,
-            controlsContainer: this.controlsContainer
+            container        : document.querySelector('.Tiny-gallery-container'),
+            navContainer     : document.querySelector('.Tiny-gallery-nav'),
+            controlsContainer: document.querySelector('.Tiny-gallery-controls')
         };
+
+        console.log(options)
 
         this.slider = tns(options);
         this.slider.events.on('indexChanged', () => this.fitNavContainer(this.slider.getInfo()))
@@ -88,17 +107,29 @@ class TinyGallery extends React.Component {
         navContainer.style.transform = `translateX(${ -stepsOffset * dotStep }px)`;
     }
 
+    onImageError (index) {
+        console.log(this, index);
+        const imgs = [...this.state.imgs];
+        imgs.splice(index, 1);
+            
+        this.setState({
+            imgs
+        })
+    }
+
     render () {
-        const { imgs } = this.props;
+        const { imgs } = this.state;
+        console.log('render')
 
         if (imgs.length) return (
             <div className="Tiny-gallery">
+                <h1>{imgs.length}</h1>
                 <div className="Tiny-gallery-wrapper">
                     <div
                         className="Tiny-gallery-container"
                         ref={node => this.sliderContainer = node}
                     >
-                        <GalleryItemsList imgs={imgs} />
+                        <GalleryItemsList imgs={imgs} onError={index => this.onImageError(index)}/>
                     </div>
 
                     <div className="Tiny-gallery-controls"

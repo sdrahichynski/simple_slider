@@ -14,17 +14,12 @@ const imgs = [
     },
 
     {
-        src: 'https://placeimg.com/600/400/tech?2',
+        src: 'https://404error',
         alt: 'Photo'
     },
 
     {
         src: 'https://placeimg.com/600/400/tech?3',
-        alt: 'Photo'
-    },
-
-    {
-        src: 'https://placeimg.com/600/400/tech?4',
         alt: 'Photo'
     },
 
