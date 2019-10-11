@@ -48,13 +48,10 @@ class TinyGallery extends React.Component {
         super(props);
 
         this.slider = null;
-        this.state = {
-            imgs: props.imgs
-        }
     }
 
     componentDidMount () {
-        // if (this.props.imgs.length) this.initSlider();
+        if (this.props.imgs.length) this.initSlider();
     }
 
     componentWillUnmount () {
@@ -63,23 +60,21 @@ class TinyGallery extends React.Component {
 
     componentDidUpdate () {
         // this.slider.destroy && this.slider.destroy();
-        console.log(21)
-         this.initSlider();
+        this.slider.rebuild();
     }
 
     componentWillUpdate () {
+        this.slider.destroy();
         console.log(this.slider);
     }
 
     initSlider () {
         console.log('slider initialize')
         const options = {
-            container        : document.querySelector('.Tiny-gallery-container'),
-            navContainer     : document.querySelector('.Tiny-gallery-nav'),
-            controlsContainer: document.querySelector('.Tiny-gallery-controls')
+            container        : this.sliderContainer,
+            navContainer     : this.navContainer,
+            controlsContainer: this.controlsContainer
         };
-
-        console.log(options)
 
         this.slider = tns(options);
         this.slider.events.on('indexChanged', () => this.fitNavContainer(this.slider.getInfo()))
@@ -107,19 +102,9 @@ class TinyGallery extends React.Component {
         navContainer.style.transform = `translateX(${ -stepsOffset * dotStep }px)`;
     }
 
-    onImageError (index) {
-        console.log(this, index);
-        const imgs = [...this.state.imgs];
-        imgs.splice(index, 1);
-            
-        this.setState({
-            imgs
-        })
-    }
-
     render () {
-        const { imgs } = this.state;
-        console.log('render')
+        const { imgs, onImageError } = this.props;
+
 
         if (imgs.length) return (
             <div className="Tiny-gallery">
@@ -129,7 +114,7 @@ class TinyGallery extends React.Component {
                         className="Tiny-gallery-container"
                         ref={node => this.sliderContainer = node}
                     >
-                        <GalleryItemsList imgs={imgs} onError={index => this.onImageError(index)}/>
+                        <GalleryItemsList imgs={imgs} onError={index => onImageError(index)}/>
                     </div>
 
                     <div className="Tiny-gallery-controls"

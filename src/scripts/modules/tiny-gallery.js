@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import TinyGallery from '../components/TinyGallery';
+import Gallery from '../components/Gallery';
 
 const galleryNode = document.querySelector('.js_gallery');
 
@@ -41,7 +41,7 @@ const imgs = [
 
 if (galleryNode) {
     ReactDOM.render(
-        <TinyGallery imgs={[...imgs]} />,
+        <Gallery imgs={[...imgs]} />,
         galleryNode
     )
 }
