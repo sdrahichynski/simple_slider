@@ -1,17 +1,32 @@
 'use strict';
 
-export const initMap = ({
-    apiKey,
-    locale,
-    callbackName = 'googleMapsCallback',
-    callback     = () => {},
-}) => {
-    const gmScript = document.createElement('script');
+class GoogleMap {
+    constructor (props) {
+        this.initMap(props);
+    }
 
-    window[callbackName] = () => {
-        callback();
-    };
+    initMap ({
+        apiKey,
+        locale,
+        callbackName = 'googleMapsCallback',
+        callback     = () => {},
+        node
+    }) {
+        const gmScript = document.createElement('script');
 
-    gmScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&language=${locale}&callback=${callbackName}`;
-    document.head.appendChild(gmScript);
-};
+        window[callbackName] = () => {
+            callback();
+
+            this.map = new google.maps.Map(node, {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+        };
+    
+        gmScript.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&language=${locale}&callback=${callbackName}`;
+        document.head.appendChild(gmScript);
+    }
+}
+
+
+export { GoogleMap };
