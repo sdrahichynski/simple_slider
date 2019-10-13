@@ -45,12 +45,14 @@ gulp.task('webpack', (callback) => {
 		devtool: isDevelopment ? 'cheap-module-inline-source-map' : null,
 		module: {
 			rules: [{
-				test: /\.js/,
+				test: /\.(js|jsx)$/,
+				exclude: /(node_modules)/,
 
 				use: {
-					loader: 'babel-loader',
+					loader : 'babel-loader?cacheDirectory',
 					options: {
-						presets: ['es2015', 'react']
+						presets: ['@babel/preset-env'].map(require.resolve),
+						plugins: ['@babel/plugin-proposal-class-properties']
 					}
 				}
 			}]

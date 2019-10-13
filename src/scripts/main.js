@@ -1,14 +1,24 @@
 // import './modules/slider';
 // import './modules/tiny-gallery';
 
-import { initMap, GoogleMap } from './modules/map';
+import { loadScript, GoogleMap } from './modules/map';
 
-const node = document.querySelector('.map');
-const map = new GoogleMap({
+let map;
+
+const initMap = () => {
+    map = new GoogleMap(
+        {
+            node: document.querySelector('.map'),
+            options: {
+                zoom: 11,
+                center: { lat: 53.9, lng: 27.55 }
+            }
+        }
+    )
+}
+
+loadScript({
     apiKey: 'AIzaSyDCmxn-x-A0CmwgNv4saEyHf_1AOSNhAV8',
     locale: 'en',
-    callback: () => console.log('HOTELS MAP LOADED', window.google),
-    node,
-});
-
-console.log(map);
+    callback: initMap
+})
